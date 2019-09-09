@@ -1,0 +1,376 @@
+<div class="purchase-create-wrapper d-flex justify-content-center flex-wrap">
+  <div class="scrollable">
+    <div class="wrapper m-3">
+      <div class="top-bar row">
+        <div class="text-center font-bold">Tax Invoice</div>
+      </div>
+      <div class="shop-info row">
+        <div class="w-50">
+          <div class="padding">
+            <div class="fake-row">
+              <input type="text" class="font-weight-bold control-border" placeholder="Name"
+                [(ngModel)]="invoiceData.firm.name">
+            </div>
+            <div class="fake-row">
+              <textarea class="address-control control-border" cols="68" rows="2" placeholder="Address"
+                [(ngModel)]="invoiceData.firm.address"></textarea>
+            </div>
+            <div class="fake-row">
+              <div class="fake-col">
+                PAN : <input type="text" class="pan-control control-border text-uppercase"
+                  [(ngModel)]="invoiceData.firm.pan">
+              </div>
+              <div class="fake-col">
+                GSTN : <input type="text" class="gstn-control control-border text-uppercase"
+                  [(ngModel)]="invoiceData.firm.gstn">
+              </div>
+              <div class="fake-col">
+                State Code : <input type="number" class="code-control control-border" min="1" max="37"
+                  [(ngModel)]="invoiceData.firm.code">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-50">
+          <div class="padding">
+            <div class="fake-row">
+              <strong>Bill No.</strong>
+              <span>: <input type="text" class="control-border" [(ngModel)]="invoiceData.invoiceId"></span>
+            </div>
+            <div class="fake-row">
+              <strong>Bill Date</strong>
+              <span>: <input type="date" class="control-border" [(ngModel)]="invoiceData.invoiceDate"></span>
+            </div>
+            <div class="fake-row">
+              <strong>Payment Type</strong>
+              <span>:
+                <select class="control-border" [(ngModel)]="invoiceData.paymentType">
+                  <option value="">---select---</option>
+                  <option value="Cash">Cash</option>
+                  <option value="DD">DD</option>
+                  <option value="Cheque">Cheque</option>
+                  <option value="Net Banking">Net Banking</option>
+                </select>
+              </span>
+            </div>
+            <div class="fake-row">
+              <strong>Due Date</strong>
+              <span>: <input type="date" class="control-border" [(ngModel)]="invoiceData.dueDate"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="separator row">
+        <div class="w-50 padding">
+            <strong>Details of Receiver (Billed to)</strong>
+        </div>
+        <div class="w-50 padding">
+            <strong>Details of Consignee (Shipped to)</strong>
+        </div>
+    </div>
+      <div class="shop-info row">
+        <div class="w-50">
+          <div class="padding">
+            <div class="fake-row">
+              <input type="text" class="font-weight-bold control-border" placeholder="Name"
+                [(ngModel)]="invoiceData.billTo.name">
+            </div>
+            <div class="fake-row">
+              <textarea class="address-control control-border" cols="68" rows="2" placeholder="Address"
+                [(ngModel)]="invoiceData.billTo.address"></textarea>
+            </div>
+            <div class="fake-row">
+              <div class="fake-col">
+                PAN : <input type="text" class="pan-control control-border text-uppercase"
+                  [(ngModel)]="invoiceData.billTo.pan">
+              </div>
+              <div class="fake-col">
+                GSTN : <input type="text" class="gstn-control control-border text-uppercase"
+                  [(ngModel)]="invoiceData.billTo.gstn">
+              </div>
+              <div class="fake-col">
+                State Code : <input type="number" class="code-control control-border" min="1" max="37"
+                  [(ngModel)]="invoiceData.billTo.code">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-50" >
+          <div class="padding">
+            <div class="fake-row">
+              <input type="text" class="font-weight-bold control-border" placeholder="Name"
+                [(ngModel)]="invoiceData.shipTo.name">
+            </div>
+            <div class="fake-row">
+              <textarea class="address-control control-border" cols="68" rows="2" placeholder="Address"
+                [(ngModel)]="invoiceData.shipTo.address"></textarea>
+            </div>
+            <div class="fake-row">
+              <div class="fake-col">
+                PAN : <input type="text" class="pan-control control-border text-uppercase"
+                  [(ngModel)]="invoiceData.shipTo.pan">
+              </div>
+              <div class="fake-col">
+                GSTN : <input type="text" class="gstn-control control-border text-uppercase"
+                  [(ngModel)]="invoiceData.shipTo.gstn">
+              </div>
+              <div class="fake-col">
+                State Code : <input type="number" class="code-control control-border" min="1" max="37"
+                  [(ngModel)]="invoiceData.shipTo.code">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="items-table">
+        <div class="items-row font-bold">
+          <div class="w-slno text-center">S. No.</div>
+          <div class="w-desc text-center">
+            Description<br>
+            <button type="button" class="control-border btn-control" (click)="newItem()">+ New Item</button>
+          </div>
+          <div class="w-hsn text-center">HSN</div>
+          <div class="w-qty text-center">Qty.</div>
+          <div class="w-price text-center">Price Without GST (Rs.)</div>
+          <div class="w-price text-center">Price with GST (Rs.)</div>
+          <div class="w-disc text-center">Disc. %</div>
+          <div class="w-taxable text-center">Taxable Amt.</div>
+          <div class="w-sgst text-center no-padding">
+            <div class="separator ext-height row justify-content-center">
+              <div>SGST</div>
+            </div>
+            <div class="separator ext-height row bb-0">
+              <div class="w-gst-rate">Rate</div>
+              <div class="w-gst-amt">Amt.</div>
+            </div>
+          </div>
+          <div class="w-cgst text-center no-padding">
+            <div class="separator ext-height row justify-content-center">
+              <div>CGST</div>
+            </div>
+            <div class="separator ext-height row bb-0">
+              <div class="w-gst-rate">Rate</div>
+              <div class="w-gst-amt">Amt.</div>
+            </div>
+          </div>
+          <div class="w-igst text-center no-padding">
+            <div class="separator ext-height row justify-content-center">
+              <div>IGST</div>
+            </div>
+            <div class="separator ext-height row bb-0">
+              <div class="w-gst-rate">Rate</div>
+              <div class="w-gst-amt">Amt.</div>
+            </div>
+          </div>
+          <div class="w-total text-center">Total (Rs.)</div>
+        </div>
+  
+        <div class="items-row" *ngFor="let item of invoiceData.items;let i=index">
+          <div class="text-right w-slno hover" (click)="removeItem(i)">{{i+1}}</div>
+          <div class="w-desc">
+            <textarea cols="40" rows="2" class="control-border desc-control" [(ngModel)]="item.description"></textarea>
+          </div>
+          <div class="text-right w-hsn">
+            <input type="text" class="control-border hsn-control" [(ngModel)]="item.hsn">
+          </div>
+          <div class="text-right w-qty p-0">
+            <input type="number" class="control-border qty-control" min="0" [(ngModel)]="item.quantity">
+          </div>
+          <div class="text-right w-price">
+            <input type="number" class="control-border price-control" min="0" [(ngModel)]="item.price">
+          </div>
+          <div class="text-right w-price">
+            <input type="number" class="control-border price-control" min="0" [ngModel]="getPriceWithGST(item)"
+              (change)="setPriceWithGST($event.target.value, item)">
+          </div>
+          <div class="text-right w-disc p-0">
+            <input type="number" class="control-border disc-control" min="0" [(ngModel)]="item.discount">
+          </div>
+          <div class="text-right w-taxable">{{getItemTaxable(item)|digits}}</div>
+          <div class="text-right w-gst-rate">
+            <input type="number" class="control-border gst-control" min="0" [(ngModel)]="item.sgst">
+          </div>
+          <div class="text-right w-gst-amt">
+            {{getItemTaxAmt(item,'sgst')|digits}}</div>
+          <div class="text-right w-gst-rate">
+            <input type="number" class="control-border gst-control" min="0" [(ngModel)]="item.cgst">
+          </div>
+          <div class="text-right w-gst-amt">
+            {{getItemTaxAmt(item,'cgst')|digits}}</div>
+          <div class="text-right w-gst-rate">
+            <input type="number" class="control-border gst-control" min="0" [(ngModel)]="item.igst">
+          </div>
+          <div class="text-right w-gst-amt">
+            {{getItemTaxAmt(item,'igst')|digits}}</div>
+          <div class="text-right w-total">
+            {{getItemTotal(item)|digits}}
+          </div>
+        </div>
+        <div class="items-row" *ngIf="!invoiceData.items || invoiceData.items.length==0">
+          <div class="text-right w-slno"></div>
+          <div class="w-desc"></div>
+          <div class="text-right w-hsn"></div>
+          <div class="text-right w-qty p-0"></div>
+          <div class="text-right w-price"></div>
+          <div class="text-right w-price"></div>
+          <div class="text-right w-disc p-0"></div>
+          <div class="text-right w-taxable"></div>
+          <div class="text-right w-gst-rate"></div>
+          <div class="text-right w-gst-amt"></div>
+          <div class="text-right w-gst-rate"></div>
+          <div class="text-right w-gst-amt"></div>
+          <div class="text-right w-gst-rate"></div>
+          <div class="text-right w-gst-amt"></div>
+          <div class="text-right w-total"></div>
+        </div>
+      </div>
+      <div class="separator row">
+        <div class="level-qty">
+  
+        </div>
+        <div class="w-qty padding text-right">
+          <strong>{{totalQuantity}}</strong>
+        </div>
+        <div class="level-all-total text-right">
+          <button type="button" class="control-border btn-control" (click)="addExtra()">+ Add Extra</button>
+        </div>
+        <div class="w-total padding text-right">
+          <strong>{{subTotalAmount|digits}}</strong>
+        </div>
+      </div>
+      <div class="summary-info row">
+        <div class="d-flex flex-column">
+          <div class="separator row font-10">
+            <div class="padding text-center w-rate">
+              <strong>Rate</strong>
+            </div>
+            <div class="padding text-center w-taxable-amt">
+              <strong>Taxable Amt.</strong>
+            </div>
+            <div class="padding text-center w-sgst-amt">
+              <strong>SGST Amt.</strong>
+            </div>
+            <div class="padding text-center w-cgst-amt">
+              <strong>CGST Amt.</strong>
+            </div>
+            <div class="padding text-center w-igst-amt">
+              <strong>IGST Amt.</strong>
+            </div>
+            <div class="padding text-center w-total-amt">
+              <strong>Total Tax</strong>
+            </div>
+          </div>
+          <div class="separator row" [ngClass]="{'bb-0':!l}" *ngFor="let tax of taxGroups;let l=last">
+            <div class="padding text-right w-rate">{{tax.rate}}</div>
+            <div class="padding text-right w-taxable-amt">{{tax.taxableAmount|digits}}</div>
+            <div class="padding text-right w-sgst-amt">{{tax.sgstAmount|digits}}</div>
+            <div class="padding text-right w-cgst-amt">{{tax.cgstAmount|digits}}</div>
+            <div class="padding text-right w-igst-amt">{{tax.igstAmount|digits}}</div>
+            <div class="padding text-right w-total-amt">{{tax.totalTax|digits}}</div>
+          </div>
+          <div class="separator row bb-0 stretch-height">
+            <div class="padding text-right w-rate font-10">
+              <strong>Total</strong>
+            </div>
+            <div class="padding text-right w-taxable-amt">{{totalTaxable|digits}}</div>
+            <div class="padding text-right w-sgst-amt">{{totalSGST|digits}}</div>
+            <div class="padding text-right w-cgst-amt">{{totalCGST|digits}}</div>
+            <div class="padding text-right w-igst-amt">{{totalIGST|digits}}</div>
+            <div class="padding text-right w-total-amt">
+              <b>{{(totalSGST+totalCGST+totalIGST)|digits}}</b>
+            </div>
+          </div>
+        </div>
+        <div class="w-100">
+          <div class="padding">
+            <b>Total Amount In Words</b><br>
+            <div class="text-capitalize">
+              {{inWords(totalAmount)}}
+            </div>
+          </div>
+        </div>
+        <div class="w-final-total">
+          <div class="fake-row padding" *ngFor="let item of invoiceData.extras;let i=index">
+            <div class="fake-col">
+              <span class="fa fa-trash text-danger mr-1" (click)="removeExtra(i)"></span>
+              <input type="text" class="control-border extra-lab-control" [(ngModel)]="item.label">
+            </div>
+            <div class="float-right">
+              <input type="text" class="control-border extra-val-control text-right" [(ngModel)]="item.value"
+                (change)="parseExtraValue(item)">
+            </div>
+          </div>
+          <div class="fake-row padding bt-1">
+            <div class="fake-col">
+              <strong>Total</strong>
+            </div>
+            <div class="float-right">
+              <b>{{totalAmount|digits}}</b>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="separator row">
+        <div class="w-100 padding d-flex align-items-center">
+          <strong>Note :</strong>
+          <textarea class="control-border" cols="136" rows="1" [(ngModel)]="invoiceData.note"></textarea>
+        </div>
+      </div>
+      <!-- <div class="note-area row">
+        <div class="w-100 padding">
+          <textarea class="control-border w-100" cols="140" rows="4" [(ngModel)]="invoiceData.note"></textarea>
+        </div>
+      </div> -->
+      <div class="declare-info row">
+        <div class="w-50">
+            <div class="padding">
+                <strong><u>Declaration</u></strong> <br>
+                <div>We Declare that this invoice shows the actual price of the goods described andthat all
+                    particulars are true &amp; correct.
+                </div>
+            </div>
+        </div>
+        <div class="w-50">
+            <div class="padding d-flex flex-column align-items-center justify-content-end h-100">
+                <div class="text-center">
+                    <strong>{{invoiceData.firm.name}}</strong>
+                    <div>Authorised Signatory</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="separator row">
+        <div class="w-50 padding text-center">
+            E. &amp; OE.
+        </div>
+        <div class="w-50 padding text-center">
+            This is a computer generated invoice
+        </div>
+    </div>
+    </div>
+  </div>
+  <div class="purchase-options d-flex flex-column my-3 ml-3 noprint">
+    <button type="button" class="btn btn-success mb-2" (click)="generate()">Generate</button>
+    <button type="button" class="btn btn-sm btn-primary mb-2" (click)="newItem()">New Item</button>
+    <button type="button" class="btn btn-sm btn-primary mb-2" (click)="addExtra()">Add Extra</button>
+    <button type="button" class="btn btn-sm btn-primary mb-2" (click)="addRoundOff()">Round Off</button>
+    <table>
+      <tr>
+        <td>Total Items</td>
+        <th>{{invoiceData.items.length}}</th>
+      </tr>
+      <tr>
+        <td>Total Tax</td>
+        <th>{{(totalSGST+totalCGST+totalIGST)|digits}}</th>
+      </tr>
+      <tr>
+        <td>Total Amount</td>
+        <th>{{totalAmount|digits}}</th>
+      </tr>
+      <tr>
+        <td>No of Pages</td>
+        <th>{{pages}}</th>
+      </tr>
+    </table>
+  </div>
+</div>
