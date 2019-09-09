@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private subscriptions: {
     [key: string]: Subscription;
   };
-  constructor(private http: HttpClient, private datePipe: DatePipe) {
+  constructor(private http: HttpClient, private datePipe: DatePipe, private cdr: ChangeDetectorRef) {
     const self = this;
     self.invoiceData = {};
     self.subscriptions = {};
@@ -50,6 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
       cgst: 0,
       igst: 0
     });
+    self.cdr.detectChanges();
   }
 
   removeItem(index: number) {
@@ -173,26 +174,29 @@ export class AppComponent implements OnInit, OnDestroy {
 
   get pages() {
     const self = this;
+    const items = JSON.parse(JSON.stringify(self.invoiceData.items));
     const pages = [];
     let i;
     let flag = 1;
     let height = 0;
     while (flag) {
       height = 0;
-      for (i = 0; i < self.invoiceData.items.length; i++) {
-        const item = self.invoiceData.items[i];
+      for (i = 0; i < items.length; i++) {
+        const item = items[i];
+        item.description = '';
         const noOfLines = Math.ceil(parseFloat((item.description.length / 34).toFixed(1)));
         height += (noOfLines * 14);
-        if (self.invoiceData.items.length > i + 1) {
-          const nextItem = self.invoiceData.items[i + 1];
+        if (items.length > i + 1) {
+          const nextItem = items[i + 1];
+          nextItem.description = '';
           const nextItemHeight = (Math.ceil(parseFloat((nextItem.description.length / 34).toFixed(1))) * 14);
           if (height + nextItemHeight > 318) {
             break;
           }
         }
       }
-      pages.push(self.invoiceData.items.splice(0, i));
-      if (self.invoiceData.items.length === 0) {
+      pages.push(items.splice(0, i));
+      if (items.length === 0) {
         flag = 0;
       }
     }

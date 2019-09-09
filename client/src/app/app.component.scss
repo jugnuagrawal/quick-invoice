@@ -1,10 +1,12 @@
 .purchase-create-wrapper {
     max-height: 100vh;
     overflow-y: auto;
+    background: #fff;
 
     .scrollable {
         max-height: 100vh;
         overflow-y: auto;
+        background: #efefef;
     }
 
     .pan-control {
@@ -78,7 +80,9 @@
     }
 
     .control-border {
-        border: 1px solid #ccc;
+        border: 1px solid #eee;
+        padding: 0;
+        text-indent: 3px;
     }
 
     input,
@@ -201,7 +205,8 @@
     font-size: 12px;
     border-bottom: 1px solid #000;
     /* max-height 588px */
-    min-height: 345px;
+    // min-height: 345px;
+    min-height: calc(100vh - 406px);
 }
 
 .items-table .items-row {

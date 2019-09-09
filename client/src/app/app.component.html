@@ -8,24 +8,24 @@
         <div class="w-50">
           <div class="padding">
             <div class="fake-row">
-              <input type="text" class="font-weight-bold control-border" placeholder="Name"
+              <input type="text" class="font-weight-bold control-border" placeholder="Name" name="name"
                 [(ngModel)]="invoiceData.firm.name">
             </div>
             <div class="fake-row">
-              <textarea class="address-control control-border" cols="68" rows="2" placeholder="Address"
+              <textarea class="address-control control-border" cols="68" rows="2" name="address" placeholder="Address"
                 [(ngModel)]="invoiceData.firm.address"></textarea>
             </div>
             <div class="fake-row">
               <div class="fake-col">
-                PAN : <input type="text" class="pan-control control-border text-uppercase"
+                PAN : <input type="text" class="pan-control control-border text-uppercase" name="pan"
                   [(ngModel)]="invoiceData.firm.pan">
               </div>
               <div class="fake-col">
-                GSTN : <input type="text" class="gstn-control control-border text-uppercase"
+                GSTN : <input type="text" class="gstn-control control-border text-uppercase" name="gstn"
                   [(ngModel)]="invoiceData.firm.gstn">
               </div>
               <div class="fake-col">
-                State Code : <input type="number" class="code-control control-border" min="1" max="37"
+                State Code : <input type="number" class="code-control control-border" min="1" max="37" name="stateCode"
                   [(ngModel)]="invoiceData.firm.code">
               </div>
             </div>
@@ -34,11 +34,11 @@
         <div class="w-50">
           <div class="padding">
             <div class="fake-row">
-              <strong>Bill No.</strong>
+              <strong>Invoice No.</strong>
               <span>: <input type="text" class="control-border" [(ngModel)]="invoiceData.invoiceId"></span>
             </div>
             <div class="fake-row">
-              <strong>Bill Date</strong>
+              <strong>Invoice Date</strong>
               <span>: <input type="date" class="control-border" [(ngModel)]="invoiceData.invoiceDate"></span>
             </div>
             <div class="fake-row">
@@ -50,6 +50,7 @@
                   <option value="DD">DD</option>
                   <option value="Cheque">Cheque</option>
                   <option value="Net Banking">Net Banking</option>
+                  <option value="Credit">Credit</option>
                 </select>
               </span>
             </div>
@@ -62,60 +63,61 @@
       </div>
       <div class="separator row">
         <div class="w-50 padding">
-            <strong>Details of Receiver (Billed to)</strong>
+          <strong>Details of Receiver (Billed to)</strong>
         </div>
         <div class="w-50 padding">
-            <strong>Details of Consignee (Shipped to)</strong>
+          <strong>Details of Consignee (Shipped to)</strong>
         </div>
-    </div>
+      </div>
       <div class="shop-info row">
         <div class="w-50">
           <div class="padding">
             <div class="fake-row">
-              <input type="text" class="font-weight-bold control-border" placeholder="Name"
+              <input type="text" class="font-weight-bold control-border" placeholder="Name" name="name"
                 [(ngModel)]="invoiceData.billTo.name">
             </div>
             <div class="fake-row">
-              <textarea class="address-control control-border" cols="68" rows="2" placeholder="Address"
+              <textarea class="address-control control-border" cols="68" rows="2" placeholder="Address" name="address"
                 [(ngModel)]="invoiceData.billTo.address"></textarea>
             </div>
             <div class="fake-row">
               <div class="fake-col">
-                PAN : <input type="text" class="pan-control control-border text-uppercase"
+                PAN : <input type="text" class="pan-control control-border text-uppercase" name="pan"
                   [(ngModel)]="invoiceData.billTo.pan">
               </div>
               <div class="fake-col">
-                GSTN : <input type="text" class="gstn-control control-border text-uppercase"
+                GSTN : <input type="text" class="gstn-control control-border text-uppercase" name="gstn"
                   [(ngModel)]="invoiceData.billTo.gstn">
               </div>
               <div class="fake-col">
-                State Code : <input type="number" class="code-control control-border" min="1" max="37"
+                <span class="label">State Code :</span>
+                <input type="number" class="code-control control-border" min="1" max="37" name="stateCode"
                   [(ngModel)]="invoiceData.billTo.code">
               </div>
             </div>
           </div>
         </div>
-        <div class="w-50" >
+        <div class="w-50">
           <div class="padding">
             <div class="fake-row">
-              <input type="text" class="font-weight-bold control-border" placeholder="Name"
+              <input type="text" class="font-weight-bold control-border" placeholder="Name" name="name"
                 [(ngModel)]="invoiceData.shipTo.name">
             </div>
             <div class="fake-row">
-              <textarea class="address-control control-border" cols="68" rows="2" placeholder="Address"
+              <textarea class="address-control control-border" cols="68" rows="2" placeholder="Address" name="address"
                 [(ngModel)]="invoiceData.shipTo.address"></textarea>
             </div>
             <div class="fake-row">
               <div class="fake-col">
-                PAN : <input type="text" class="pan-control control-border text-uppercase"
+                PAN : <input type="text" class="pan-control control-border text-uppercase" name="pan"
                   [(ngModel)]="invoiceData.shipTo.pan">
               </div>
               <div class="fake-col">
-                GSTN : <input type="text" class="gstn-control control-border text-uppercase"
+                GSTN : <input type="text" class="gstn-control control-border text-uppercase" name="gstn"
                   [(ngModel)]="invoiceData.shipTo.gstn">
               </div>
               <div class="fake-col">
-                State Code : <input type="number" class="code-control control-border" min="1" max="37"
+                State Code : <input type="number" class="code-control control-border" min="1" max="37" name="stateCode"
                   [(ngModel)]="invoiceData.shipTo.code">
               </div>
             </div>
@@ -164,7 +166,7 @@
           </div>
           <div class="w-total text-center">Total (Rs.)</div>
         </div>
-  
+
         <div class="items-row" *ngFor="let item of invoiceData.items;let i=index">
           <div class="text-right w-slno hover" (click)="removeItem(i)">{{i+1}}</div>
           <div class="w-desc">
@@ -226,7 +228,7 @@
       </div>
       <div class="separator row">
         <div class="level-qty">
-  
+
         </div>
         <div class="w-qty padding text-right">
           <strong>{{totalQuantity}}</strong>
@@ -323,30 +325,30 @@
       </div> -->
       <div class="declare-info row">
         <div class="w-50">
-            <div class="padding">
-                <strong><u>Declaration</u></strong> <br>
-                <div>We Declare that this invoice shows the actual price of the goods described andthat all
-                    particulars are true &amp; correct.
-                </div>
+          <div class="padding">
+            <strong><u>Declaration</u></strong> <br>
+            <div>We Declare that this invoice shows the actual price of the goods described andthat all
+              particulars are true &amp; correct.
             </div>
+          </div>
         </div>
         <div class="w-50">
-            <div class="padding d-flex flex-column align-items-center justify-content-end h-100">
-                <div class="text-center">
-                    <strong>{{invoiceData.firm.name}}</strong>
-                    <div>Authorised Signatory</div>
-                </div>
+          <div class="padding d-flex flex-column align-items-center justify-content-end h-100">
+            <div class="text-center">
+              <strong>{{invoiceData.firm.name}}</strong>
+              <div>Authorised Signatory</div>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="separator row">
+      </div>
+      <div class="separator row">
         <div class="w-50 padding text-center">
-            E. &amp; OE.
+          E. &amp; OE.
         </div>
         <div class="w-50 padding text-center">
-            This is a computer generated invoice
+          This is a computer generated invoice
         </div>
-    </div>
+      </div>
     </div>
   </div>
   <div class="purchase-options d-flex flex-column my-3 ml-3 noprint">
