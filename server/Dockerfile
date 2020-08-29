@@ -1,8 +1,10 @@
 FROM node:10-alpine
 
-COPY . .
+COPY package.json package.json
 
 RUN npm i
+
+COPY . .
 
 EXPOSE 3300
 
